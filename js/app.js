@@ -66,15 +66,19 @@ function controls(e) {
 
   if(e.keyCode === 38){
     console.log("up")
+    direction = -20
   }
   if(e.keyCode === 39){
     console.log("right")
+    direction = 1
   }
   if(e.keyCode === 40){
     console.log("down")
+    direction = 20
   }
   if(e.keyCode === 37){
     console.log("left")
+    direction = -1
   } 
 }
 
