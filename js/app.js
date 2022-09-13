@@ -21,33 +21,60 @@ function init() {
     newSquare.setAttribute('class', 'innerSquare')
     gameContainer.appendChild(newSquare)
   }
+  
   square = document.querySelectorAll('div.innerSquare')
-
   start()
 }
 
 function start(){
 
-  console.log(square)
   snake = [0, 1, 2]
   direction = 1;
   currIdx = 0;
-  getSnake()
   apple()
+  getSnake()
+
+  setInterval(movement, 1000)
+
 }
 
 function getSnake() {
-
+  
   snake.forEach((el, idx) => {
-    console.log(square[el])
     square[idx].classList.add('snake')
   })
 }
 
-function apple() {
-  
-  let currAppleIdx = (Math.floor(Math.random() * square.length))
+function movement() {
 
-  square[currAppleIdx].style.backgroundColor = 'red';
+  let end = snake.shift()
+  square[end].classList.remove('snake')
+
+  let lastEl = snake.length -1
+
+  snake.push(snake[lastEl] + direction)
+  square[snake[lastEl] + direction].classList.add('snake')
 }
 
+
+// function controls(e) {
+  //   if(e.ke)
+// }
+
+
+function apple() {
+
+  let currAppleIdx = (Math.floor(Math.random() * square.length))
+  let currId = square[currAppleIdx].getAttribute('id')
+
+  if(currId !== 'snake') {
+  square[currAppleIdx].style.backgroundColor = 'red';
+} else {
+  apple()
+}
+}
+
+function eatApple() {
+  
+  square[snake[0]].classList.add('snake')
+}
