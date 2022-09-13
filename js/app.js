@@ -10,6 +10,9 @@ currIdx, appleIdx, direction
 const gameContainer = document.getElementById('game-container')
 
 /*----------------------------- Event Listeners -----------------------------*/
+
+document.addEventListener('keydown', controls)
+
 /*-------------------------------- Functions --------------------------------*/
 init()
 
@@ -53,9 +56,27 @@ function movement() {
   let lastEl = snake.length -1
 
   snake.push(snake[lastEl] + direction)
+
+
   square[snake[lastEl] + direction].classList.add('snake')
 }
 
+
+function controls(e) {
+
+  if(e.keyCode === 38){
+    console.log("up")
+  }
+  if(e.keyCode === 39){
+    console.log("right")
+  }
+  if(e.keyCode === 40){
+    console.log("down")
+  }
+  if(e.keyCode === 37){
+    console.log("left")
+  } 
+}
 
 // function controls(e) {
   //   if(e.ke)
@@ -65,9 +86,9 @@ function movement() {
 function apple() {
 
   let currAppleIdx = (Math.floor(Math.random() * square.length))
-  let currId = square[currAppleIdx].getAttribute('id')
+  let currClass = square[currAppleIdx].getAttribute('class')
 
-  if(currId !== 'snake') {
+  if(currClass !== 'snake') {
   square[currAppleIdx].style.backgroundColor = 'red';
 } else {
   apple()
