@@ -3,7 +3,7 @@
 /*-------------------------------- Variables --------------------------------*/
 
 let board, newSquare, square, snake, score, 
-currIdx, appleIdx, direction 
+currIdx, currAppleIdx, direction 
 
 /*------------------------ Cached Element References ------------------------*/
 
@@ -57,6 +57,13 @@ function movement() {
 
   snake.push(snake[lastEl] + direction)
 
+  let currClass = square[snake[lastEl] + direction].getAttribute('class')
+
+  if(currClass.includes('apple')){
+    square[snake[lastEl] + direction].classList.replace('apple', 'snake')
+    snake.unshift(snake[0])
+    apple()
+  }
 
   square[snake[lastEl] + direction].classList.add('snake')
 }
@@ -82,24 +89,26 @@ function controls(e) {
   } 
 }
 
-// function controls(e) {
-  //   if(e.ke)
-// }
-
 
 function apple() {
 
-  let currAppleIdx = (Math.floor(Math.random() * square.length))
+  currAppleIdx = (Math.floor(Math.random() * square.length))
   let currClass = square[currAppleIdx].getAttribute('class')
 
   if(currClass !== 'snake') {
-  square[currAppleIdx].style.backgroundColor = 'red';
+
+  square[currAppleIdx].classList.add('apple')
+  // square[currAppleIdx].style.backgroundColor = 'red';
 } else {
   apple()
 }
 }
 
-function eatApple() {
-  
-  square[snake[0]].classList.add('snake')
-}
+
+
+// function eatApple() {
+//   if(){
+
+//   }
+//   square[snake[0]].classList.add('snake')
+// }
