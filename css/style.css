@@ -1,0 +1,23 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 0 auto;
+}
+
+#game-container {
+  border: 2px solid black;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 0;
+  width: 500px;
+}
+
+.innerSquare {
+  border: 2px solid black;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+}
