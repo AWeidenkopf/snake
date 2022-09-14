@@ -3,7 +3,7 @@
 /*-------------------------------- Variables --------------------------------*/
 
 let board, boardSize, newSquare, square, snake, score, interval,
-  currIdx, currAppleIdx, direction, nextDirection
+  currIdx, currAppleIdx, direction, keysPressed
 
 /*------------------------ Cached Element References ------------------------*/
 
@@ -46,7 +46,7 @@ function backgroundSquares() {
 
 
 function start() {
-
+  keysPressed = []
   snake = [0, 1, 2]
   direction = 1;
   boardSize = 21
@@ -111,21 +111,23 @@ function movement() {
 
 
 function controls(e) {
+  keysPressed.push(e.keyCode)
+  const key = keysPressed.shift()
   if (Math.abs(direction) === 21) {
-    if (e.keyCode === 39) {
+    if (key === 39) {
       console.log("right")
       direction = 1
     }
-    if (e.keyCode === 37) {
+    if (key === 37) {
       console.log("left")
       direction = -1
     }
   } else if (Math.abs(direction) === 1) {
-    if (e.keyCode === 38) {
+    if (key === 38) {
       console.log("up")
       direction = -21
     }
-    if (e.keyCode === 40) {
+    if (key === 40) {
       console.log("down")
       direction = 21
     }
