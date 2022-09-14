@@ -2,7 +2,7 @@
 /*-------------------------------- Constants --------------------------------*/
 /*-------------------------------- Variables --------------------------------*/
 
-let boardSize, newSquare, square, snake, score, interval,
+let board, boardSize, newSquare, square, snake, score, interval,
   currIdx, currAppleIdx, direction, nextDirection
 
 /*------------------------ Cached Element References ------------------------*/
@@ -19,17 +19,24 @@ resetBtn.addEventListener('click', init)
 init()
 
 function init() {
-
-  for (i = 0; i <= 359; i++) {
-    newSquare = document.createElement('div')
-    newSquare.setAttribute('id', `sq${i}`)
-    newSquare.setAttribute('class', 'innerSquare')
-    gameContainer.appendChild(newSquare)
+  clearInterval(interval)
+  if (board === undefined) {
+    for (i = 0; i <= 359; i++) {
+      newSquare = document.createElement('div')
+      newSquare.setAttribute('id', `sq${i}`)
+      newSquare.setAttribute('class', 'innerSquare')
+      board = gameContainer.appendChild(newSquare)
+    }
+  } else {
+    square.forEach((el) => {
+      el.classList.remove('apple', 'snake')
+    })
   }
-
   square = document.querySelectorAll('div.innerSquare')
   start()
+
 }
+
 
 function start() {
 
@@ -53,13 +60,12 @@ function getSnake() {
 
 function movement() {
   square.forEach((el, idx) => {
-    if(el.classList.contains('snake') && !snake.includes(idx)){
-      if(!el.classList.contains('apple')) {
-      square[idx].classList.add('poop')
+    if (el.classList.contains('snake') && !snake.includes(idx)) {
+      if (!el.classList.contains('apple')) {
+        square[idx].classList.add('poop')
       }
     }
   })
-  console.log(square[snake[snake.length - 1]])
 
   if (snake[snake.length - 1] + direction >= boardSize * 18 && direction === 20) {
     return gameOver()
@@ -85,7 +91,6 @@ function movement() {
 
   snake.push(snake[lastEl] + direction)
 
-
   let currClass = square[snake[lastEl] + direction].getAttribute('class')
 
   if (currClass.includes('apple')) {
@@ -103,25 +108,25 @@ function movement() {
 
 
 function controls(e) {
-  if(Math.abs(direction) === 20){
+  if (Math.abs(direction) === 20) {
     if (e.keyCode === 39) {
       console.log("right")
       direction = 1
-    } 
+    }
     if (e.keyCode === 37) {
       console.log("left")
       direction = -1
-    } 
-  } else if(Math.abs(direction) === 1) {
-  if (e.keyCode === 38) {
-    console.log("up")
-    direction = -20
+    }
+  } else if (Math.abs(direction) === 1) {
+    if (e.keyCode === 38) {
+      console.log("up")
+      direction = -20
+    }
+    if (e.keyCode === 40) {
+      console.log("down")
+      direction = 20
+    }
   }
-  if (e.keyCode === 40) {
-    console.log("down")
-    direction = 20
-  }
-}
 }
 
 
@@ -130,7 +135,7 @@ function apple() {
   currAppleIdx = (Math.floor(Math.random() * square.length))
   let currClass = square[currAppleIdx].getAttribute('class')
 
-  if(!currClass.includes('snake')) {
+  if (!currClass.includes('snake')) {
     square[currAppleIdx].classList.add('apple')
   } else {
     apple()
