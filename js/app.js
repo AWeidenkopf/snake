@@ -21,7 +21,7 @@ init()
 function init() {
   clearInterval(interval)
   if (board === undefined) {
-    for (i = 0; i <= 359; i++) {
+    for (i = 0; i <= 377; i++) {
       newSquare = document.createElement('div')
       newSquare.setAttribute('id', `sq${i}`)
       newSquare.setAttribute('class', 'innerSquare')
@@ -29,22 +29,27 @@ function init() {
     }
   } else {
     square.forEach((el) => {
-      el.classList.remove('apple', 'snake')
+      el.classList.remove('apple', 'snake', 'game-over')
     })
-
-    gameContainer.style.backgroundColor = 'white'
 }
   square = document.querySelectorAll('div.innerSquare')
+  backgroundSquares()
   start()
 
 }
+
+function backgroundSquares() {
+  for(i = 1; i <= square.length; i += 2) {
+    square[i].classList.add('odd-idx')
+    }
+  }
 
 
 function start() {
 
   snake = [0, 1, 2]
   direction = 1;
-  boardSize = 20
+  boardSize = 21
   score = 0;
   apple()
   getSnake()
@@ -61,25 +66,21 @@ function getSnake() {
 }
 
 function movement() {
-  square.forEach((el, idx) => {
-    if (el.classList.contains('snake') && !snake.includes(idx)) {
-      if (!el.classList.contains('apple')) {
-        square[idx].classList.add('poop')
-      }
-    }
-  })
 
-  if (snake[snake.length - 1] + direction >= boardSize * 18 && direction === 20) {
+  if (snake[snake.length - 1] + direction >= boardSize * 18 && direction === 21) {
     return gameOver()
+    // down
   }
-  if (snake[snake.length - 1] + direction < 0 && direction === -20) {
+  if (snake[snake.length - 1] + direction < 0 && direction === -21) {
     return gameOver()
+    // up
   }
-  if (snake[snake.length - 1] % boardSize === boardSize - 1 && direction === 1) {
+  if (snake[snake.length - 1] % boardSize === 20 && direction === 1) {
     return gameOver()
   }
   if (snake[snake.length - 1] % boardSize === 0 && direction === -1) {
     return gameOver()
+    // left
   }
   if (square[snake[snake.length - 1] + direction].classList.contains('snake')) {
     return gameOver()
@@ -110,7 +111,7 @@ function movement() {
 
 
 function controls(e) {
-  if (Math.abs(direction) === 20) {
+  if (Math.abs(direction) === 21) {
     if (e.keyCode === 39) {
       console.log("right")
       direction = 1
@@ -122,11 +123,11 @@ function controls(e) {
   } else if (Math.abs(direction) === 1) {
     if (e.keyCode === 38) {
       console.log("up")
-      direction = -20
+      direction = -21
     }
     if (e.keyCode === 40) {
       console.log("down")
-      direction = 20
+      direction = 21
     }
   }
 }
@@ -146,5 +147,5 @@ function apple() {
 
 function gameOver() {
   clearInterval(interval)
-  gameContainer.style.backgroundColor = 'red'
+  square.forEach((el) => el.classList.add('game-over'))
 }

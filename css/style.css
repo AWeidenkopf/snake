@@ -3,15 +3,30 @@ body {
   justify-content: center;
   text-align: center;
   margin: 0 auto;
+  background-color: rgb(89, 164, 89);
 }
 
 header {
   display: flex;
   position: relative;
   justify-content: space-around;
+  align-items: center;
+  text-align: center;
   width: 100%;
   height: 15vh;
-  background-color: gray;
+  background-color: green;
+  font-family: 'Nabla', cursive;
+}
+
+#reset {
+  background-color: rgb(255, 94, 0);;
+  color: rgb(255, 94, 0);
+  font-family: 'Nabla', cursive;
+  letter-spacing: 3px;
+  border: 2px solid rgb(221, 221, 23);
+  border-radius: 10px;
+  height: 30px;
+  width: 80px;
 }
 
 #game-container {
@@ -20,14 +35,21 @@ header {
   justify-content: center;
   flex-wrap: wrap;
   margin: 30vh auto;
-  width: 500px;
+  width: 525px;
 }
 
 .innerSquare {
-  border: 2px solid black;
+  background-color: rgb(114, 228, 114);
+  border: 2px solid rgb(114, 228, 114);
   width: 20px;
   height: 20px;
   margin: 0;
+}
+
+
+.odd-idx {
+  background-color: rgb(80, 160, 80);
+  border: 2px solid rgb(80, 160, 80);
 }
 
 .snake {
@@ -37,8 +59,10 @@ header {
 
 .apple {
   background-color: red;
+  border-radius: 50%;
 }
 
-.poop {
-  background-color: rgb(124, 71, 27);
+.game-over {
+  background-color:red;
+  border: 2px solid black;
 }
