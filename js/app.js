@@ -31,7 +31,9 @@ function init() {
     square.forEach((el) => {
       el.classList.remove('apple', 'snake')
     })
-  }
+
+    gameContainer.style.backgroundColor = 'white'
+}
   square = document.querySelectorAll('div.innerSquare')
   start()
 
