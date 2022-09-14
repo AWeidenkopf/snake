@@ -56,7 +56,7 @@ function movement() {
     return gameOver()
   }
   if (snake[snake.length - 1] + direction < 0 && direction === -20) {
-    gameOver()
+    return gameOver()
   }
   if (snake[snake.length - 1] % boardSize === boardSize - 1 && direction === 1) {
     return gameOver()
@@ -65,7 +65,7 @@ function movement() {
     return gameOver()
   }
   if (square[snake[snake.length - 1] + direction].classList.contains('snake')) {
-    gameOver()
+    return gameOver()
   }
 
 
@@ -78,7 +78,6 @@ function movement() {
 
 
   let currClass = square[snake[lastEl] + direction].getAttribute('class')
-
 
   if (currClass.includes('apple')) {
     square[snake[lastEl] + direction].classList.replace('apple', 'snake')
@@ -95,23 +94,25 @@ function movement() {
 
 
 function controls(e) {
-
+  if(Math.abs(direction) === 20){
+    if (e.keyCode === 39) {
+      console.log("right")
+      direction = 1
+    }
+    if (e.keyCode === 37) {
+      console.log("left")
+      direction = -1
+    }
+  } else if(Math.abs(direction) === 1) {
   if (e.keyCode === 38) {
     console.log("up")
     direction = -20
-  }
-  if (e.keyCode === 39) {
-    console.log("right")
-    direction = 1
   }
   if (e.keyCode === 40) {
     console.log("down")
     direction = 20
   }
-  if (e.keyCode === 37) {
-    console.log("left")
-    direction = -1
-  }
+}
 }
 
 
@@ -120,10 +121,8 @@ function apple() {
   currAppleIdx = (Math.floor(Math.random() * square.length))
   let currClass = square[currAppleIdx].getAttribute('class')
 
-  if (currClass !== 'snake') {
-
+  if(!currClass.includes('snake')) {
     square[currAppleIdx].classList.add('apple')
-    // square[currAppleIdx].style.backgroundColor = 'red';
   } else {
     apple()
   }
