@@ -139,9 +139,12 @@ function movement() {
 
 
 function controls(e) {
+  if(e.keyCode !== keysPressed[keysPressed.length -1]) {
   return keysPressed.push(e.keyCode)
+} else {
+  return keysPressed
 }
-
+}
 
 
 
