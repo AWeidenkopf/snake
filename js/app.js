@@ -3,12 +3,16 @@
 /*-------------------------------- Variables --------------------------------*/
 
 let board, boardSize, newSquare, square, snake, score, interval,
-  currIdx, currAppleIdx, direction, keysPressed
+  currIdx, currAppleIdx, direction, keysPressed, appleCount
 
 /*------------------------ Cached Element References ------------------------*/
 
 const gameContainer = document.getElementById('game-container')
 const resetBtn = document.getElementById('reset')
+const scoreDisplay = document.getElementById('score')
+const gameOverBox = document.getElementById('game-over-container')
+const finalScore = document.getElementById('final-score')
+const finalAppleCount = document.getElementById('apple-count')
 
 /*----------------------------- Event Listeners -----------------------------*/
 
@@ -28,11 +32,13 @@ function init() {
       board = gameContainer.appendChild(newSquare)
     }
   } else {
+    gameOverBox.style.display = 'none'
     square.forEach((el) => {
       el.classList.remove('apple', 'snake', 'game-over')
     })
 }
   square = document.querySelectorAll('div.innerSquare')
+  scoreDisplay.textContent = 'Score'
   backgroundSquares()
   start()
 
@@ -51,6 +57,7 @@ function start() {
   direction = 1;
   boardSize = 21
   score = 0;
+  appleCount = 0;
   apple()
   getSnake()
 
@@ -100,7 +107,9 @@ function movement() {
     square[currAppleIdx].textContent = ""
     square[currAppleIdx].classList.remove('apple')
     snake.push(currAppleIdx)
+    appleCount += 1
     score += 100
+    scoreDisplay.textContent = `Score: ${score}`
     apple()
   }
 
@@ -151,6 +160,11 @@ function apple() {
 // 🍎
 function gameOver() {
   clearInterval(interval)
+  gameOverBox.style.display = 'flex'
+  finalScore.textContent = `${score}`
+  finalAppleCount.textContent = `${appleCount}`
+
   square[currAppleIdx].textContent = ""
+  square[currAppleIdx].classList.remove('apple')
   square.forEach((el) => el.classList.add('game-over'))
 }
