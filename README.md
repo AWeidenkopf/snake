@@ -4,7 +4,7 @@ Snake is a game where the player maneuvers a growing line that becomes a primary
 
 ## Motivation 
 
-I've decided on making a snake game for I wanted to try making a real time game without using a Canvas.
+I decided on making a snake game because I wanted to try making a real-time game without using canvas.
 
 ## ScreenShots
 

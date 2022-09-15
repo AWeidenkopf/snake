@@ -119,7 +119,6 @@ function movement() {
 
   snake.push(snake[lastEl] + direction)
 
-  let currClass = square[snake[lastEl] + direction].getAttribute('class')
 
   if (square[snake[lastEl] + direction] === square[currAppleIdx]) {
     square[currAppleIdx].textContent = ""
