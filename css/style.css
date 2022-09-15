@@ -91,6 +91,7 @@ span {
 #game-over-container {
   position: absolute;
   font-size: 20px;
+  color: white;
   display: none;
   flex-direction: column;
   justify-content: center;
