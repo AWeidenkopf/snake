@@ -36,7 +36,7 @@ function init() {
     square.forEach((el) => {
       el.classList.remove('apple', 'snake', 'game-over')
     })
-}
+  }
   square = document.querySelectorAll('div.innerSquare')
   scoreDisplay.textContent = 'Score'
   backgroundSquares()
@@ -45,10 +45,10 @@ function init() {
 }
 
 function backgroundSquares() {
-  for(i = 1; i <= square.length; i += 2) {
+  for (i = 1; i <= square.length; i += 2) {
     square[i].classList.add('odd-idx')
-    }
   }
+}
 
 
 function start() {
@@ -73,6 +73,24 @@ function getSnake() {
 }
 
 function movement() {
+  const key = keysPressed.shift()
+  if (key === 39 && direction !== -1) {
+    console.log("right")
+    direction = 1
+  }
+  if (key === 37 && direction !== 1) {
+    console.log("left")
+    direction = -1
+  }
+
+  if (key === 38 && direction !== 21) {
+    console.log("up")
+    direction = -21
+  }
+  if (key === 40 && direction !== -21) {
+    console.log("down")
+    direction = 21
+  }
 
   if (snake[snake.length - 1] + direction >= boardSize * 18 && direction === 21) {
     return gameOver()
@@ -121,26 +139,10 @@ function movement() {
 
 
 function controls(e) {
-
-  
-    if (e.keyCode === 39 && direction !==  -1) {
-      console.log("right")
-      direction = 1
-    }
-    if (e.keyCode === 37 && direction !== 1) {
-      console.log("left")
-      direction = -1
-    }
-  
-    if (e.keyCode === 38 && direction !== 21) {
-      console.log("up")
-      direction = -21
-    }
-    if (e.keyCode === 40 && direction !== -21) {
-      console.log("down")
-      direction = 21
-    }
+  return keysPressed.push(e.keyCode)
 }
+
+
 
 
 function apple() {
@@ -149,7 +151,7 @@ function apple() {
   let currClass = square[currAppleIdx].getAttribute('class')
 
   if (!currClass.includes('snake')) {
-    square[currAppleIdx].textContent = "o" 
+    square[currAppleIdx].textContent = "o"
     square[currAppleIdx].classList.add('apple')
   } else {
     apple()
