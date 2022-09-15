@@ -107,3 +107,9 @@ span {
   font-family: 'Nabla', cursive;
   font-size: 40px;
 }
+
+.head {
+  content: ':';
+  color: black;
+  border-radius: 50%;
+}

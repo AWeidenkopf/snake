@@ -33,7 +33,9 @@ function init() {
     }
   } else {
     gameOverBox.style.display = 'none'
-    square.forEach((el) => {
+    square.forEach((el, idx) => {
+      square[idx].textContent = ""
+      console.log(square[idx])
       el.classList.remove('apple', 'snake', 'game-over')
     })
   }
@@ -116,6 +118,7 @@ function movement() {
   square[end].classList.remove('snake')
 
   let lastEl = snake.length - 1
+  // snake[lastEl].classList.add('head')
 
   snake.push(snake[lastEl] + direction)
 
@@ -168,5 +171,7 @@ function gameOver() {
 
   square[currAppleIdx].textContent = ""
   square[currAppleIdx].classList.remove('apple')
-  square.forEach((el) => el.classList.add('game-over'))
+  square.forEach((el) => {
+    el.classList.add('game-over')
+  })
 }
