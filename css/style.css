@@ -58,9 +58,25 @@ header {
 }
 
 .apple {
-  background-color: red;
-  border-radius: 50%;
+  color: red;
+  font-size: 20px;
+  font-family: 'Oi', cursive;
+  margin: 0;
+  position: relative;
+  -webkit-text-stroke: 2px red;
 }
+.apple::before {
+  content: "`";
+  position: absolute;
+  font-size: 10px;
+  color: green;
+  -webkit-text-stroke: 2px green;
+  left: 6px;
+  top: 0;
+  overflow: hidden;
+  z-index: 9999;
+}
+
 
 .game-over {
   background-color:red;

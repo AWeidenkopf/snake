@@ -96,8 +96,9 @@ function movement() {
 
   let currClass = square[snake[lastEl] + direction].getAttribute('class')
 
-  if (currClass.includes('apple')) {
-    square[currAppleIdx].classList.replace('apple', 'snake')
+  if (square[snake[lastEl] + direction] === square[currAppleIdx]) {
+    square[currAppleIdx].textContent = ""
+    square[currAppleIdx].classList.remove('apple')
     snake.push(currAppleIdx)
     score += 100
     apple()
@@ -141,13 +142,15 @@ function apple() {
   let currClass = square[currAppleIdx].getAttribute('class')
 
   if (!currClass.includes('snake')) {
+    square[currAppleIdx].textContent = "o" 
     square[currAppleIdx].classList.add('apple')
   } else {
     apple()
   }
 }
-
+// 🍎
 function gameOver() {
   clearInterval(interval)
+  square[currAppleIdx].textContent = ""
   square.forEach((el) => el.classList.add('game-over'))
 }
