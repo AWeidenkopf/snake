@@ -121,27 +121,25 @@ function movement() {
 
 
 function controls(e) {
-  keysPressed.push(e.keyCode)
-  const key = keysPressed.shift()
-  if (Math.abs(direction) === 21) {
-    if (key === 39) {
+
+  
+    if (e.keyCode === 39 && direction !==  -1) {
       console.log("right")
       direction = 1
     }
-    if (key === 37) {
+    if (e.keyCode === 37 && direction !== 1) {
       console.log("left")
       direction = -1
     }
-  } else if (Math.abs(direction) === 1) {
-    if (key === 38) {
+  
+    if (e.keyCode === 38 && direction !== 21) {
       console.log("up")
       direction = -21
     }
-    if (key === 40) {
+    if (e.keyCode === 40 && direction !== -21) {
       console.log("down")
       direction = 21
     }
-  }
 }
 
 
