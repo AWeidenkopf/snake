@@ -104,6 +104,7 @@ function movement() {
   }
   if (snake[snake.length - 1] % boardSize === 20 && direction === 1) {
     return gameOver()
+    // right
   }
   if (snake[snake.length - 1] % boardSize === 0 && direction === -1) {
     return gameOver()
@@ -118,7 +119,6 @@ function movement() {
   square[end].classList.remove('snake')
 
   let lastEl = snake.length - 1
-  // snake[lastEl].classList.add('head')
 
   snake.push(snake[lastEl] + direction)
 
@@ -133,22 +133,17 @@ function movement() {
     apple()
   }
 
-
-
   square[snake[lastEl] + direction].classList.add('snake')
 
 }
 
-
 function controls(e) {
-  if(e.keyCode !== keysPressed[keysPressed.length -1]) {
-  return keysPressed.push(e.keyCode)
-} else {
-  return keysPressed
+  if (e.keyCode !== keysPressed[keysPressed.length - 1]) {
+    return keysPressed.push(e.keyCode)
+  } else {
+    return keysPressed
+  }
 }
-}
-
-
 
 function apple() {
 
@@ -162,7 +157,7 @@ function apple() {
     apple()
   }
 }
-// 🍎
+
 function gameOver() {
   clearInterval(interval)
   gameOverBox.style.display = 'flex'
