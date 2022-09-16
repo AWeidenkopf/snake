@@ -25,3 +25,6 @@ Here's the link where you can try it out: https://ana-weidenkopf-snake.netlify.a
 
 - [ ] Add pause/start feature
 - [ ] Increase speed over time
+- [ ] Add mobile option
+- [ ] Add instructions in the readMe
+- [ ] Keep track of the highest score
